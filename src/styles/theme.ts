@@ -1,8 +1,8 @@
 const theme = {
   fonts: {},
   colors: {
-    background_900: "#212121",
-    background_1000: "#FFFFFF",
+    background_default: "#F5F5F5",
+    light: "#FFFFFF",
     red_900: "#F43735",
     black_1000: "#000000",
     gray_600: "#C6C6C6",
