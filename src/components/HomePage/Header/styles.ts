@@ -14,7 +14,7 @@ export const Container = styled.header`
 
 export const Title = styled.h1`
   font-family: Roboto;
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 900;
   text-align: center;
   color: ${theme.colors.gray_900};
@@ -54,20 +54,20 @@ export const SearchInput = styled.input.attrs({
   background-color: transparent;
   border: 0;
   outline: none;
+
+  &::placeholder {
+    color: ${theme.colors.pink_300_80};
+  }
 `;
 
 export const SearchIcon: React.FC = styled(Image).attrs({
   src: "/icons/search.svg",
   quality: 100,
   priority: true,
-  alt: "ihuu-logo-image",
+  alt: "search icon from input",
   width: 30,
   height: 30,
   style: {
     objectFit: "contain",
   },
-})`
-  @media (max-width: 1080px) {
-    width: 60px;
-  }
-`;
+})``;

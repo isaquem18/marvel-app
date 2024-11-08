@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerContent = styled.div`
-  max-width: calc(1197px + 1.5rem);
+  max-width: calc(1197px + 3rem);
   margin: 0 auto;
   padding: 0 1.5rem;
 `;
