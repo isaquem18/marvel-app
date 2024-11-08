@@ -15,12 +15,11 @@ export const HeroCardImageContainer = styled.div`
   width: 100%;
   height: 169px;
   border-radius: 8px;
-  background-color: red;
   position: relative;
   overflow: hidden;
 `;
 
-export const HeroCardImage: React.FC = styled(Image).attrs({
+export const HeroCardImage: React.FC<any> = styled(Image).attrs({
   quality: 10,
   priority: true,
   alt: "search icon from input",

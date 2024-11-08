@@ -4,6 +4,7 @@ import GlobalStyles from "@/styles/GlobalStyles";
 import { Roboto } from "next/font/google";
 
 import StyledComponentsRegistry from "@/lib/registry";
+import ContextsProvider from "@/context";
 
 export const metadata: Metadata = {
   title: "MarvelApp",
@@ -26,8 +27,10 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head></head>
       <body className={roboto.className}>
-        <GlobalStyles />
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <ContextsProvider>
+          <GlobalStyles />
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </ContextsProvider>
       </body>
     </html>
   );

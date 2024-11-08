@@ -1,22 +1,42 @@
+import Link from "next/link";
+
 import * as S from "./styles";
 
+interface Props {
+  src: string;
+  title: string;
+  text: string;
+  characterId: number;
+}
+
 export function HeroCard({
-  src = "https://cdn.awsli.com.br/800x800/1610/1610163/produto/177684974/poster-o-espetacular-homem-aranha-2-g-ebc6cbb4.jpg",
-  title = "Captain Americaaaaa ijdiejd",
-  text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel convallis velit.",
-}) {
+  src = "",
+  title = "",
+  text = "",
+  characterId,
+}: Props) {
   return (
     <S.Container>
       <S.HeroCardImageContainer>
-        <S.HeroCardImage src={src} fill />
+        <Link href={`/character/${characterId}`} scroll={false}>
+          {src && typeof src === "string" && <S.HeroCardImage src={src} fill />}
+        </Link>
       </S.HeroCardImageContainer>
       <S.TitleHeroCardContainer>
-        <S.TitleHeroCard>{title}</S.TitleHeroCard>
+        <S.TitleHeroCard>
+          <Link href={`/character/${characterId}`} scroll={false}>
+            {title}
+          </Link>
+        </S.TitleHeroCard>
         <S.LikeButtonHeroCard>
           <S.LikeButtonHeroCardIcon />
         </S.LikeButtonHeroCard>
       </S.TitleHeroCardContainer>
-      <S.TextDetails>{text}</S.TextDetails>
+      <S.TextDetails>
+        <Link href={`/character/${characterId}`} scroll={false}>
+          {text}
+        </Link>
+      </S.TextDetails>
     </S.Container>
   );
 }
