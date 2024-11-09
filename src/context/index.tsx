@@ -1,5 +1,6 @@
 "use client";
 import { ApiProvider } from "./Api";
+import { NavigationProvider } from "./NavigationData";
 import ReactQueryProvider from "./ReactQueryProvider";
 
 export default function ContextsProvider({
@@ -9,7 +10,9 @@ export default function ContextsProvider({
 }) {
   return (
     <ReactQueryProvider>
-      <ApiProvider>{children}</ApiProvider>
+      <ApiProvider>
+        <NavigationProvider>{children}</NavigationProvider>
+      </ApiProvider>
     </ReactQueryProvider>
   );
 }

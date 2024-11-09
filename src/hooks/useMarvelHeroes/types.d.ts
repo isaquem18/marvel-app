@@ -1,68 +1,100 @@
-interface MarvelResponse {
-  code: number;
-  status: string;
-  copyright: string;
-  attributionText: string;
-  attributionHTML: string;
-  etag: string;
-  data: MarvelData;
-}
-
-interface MarvelData {
-  offset: number;
-  limit: number;
-  total: number;
-  count: number;
-  results: Character[];
-}
-
-interface Character {
+interface MarvelCharacter {
   id: number;
   name: string;
   description: string;
   modified: string;
-  thumbnail: Thumbnail;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
   resourceURI: string;
-  comics: Collection;
-  series: Collection;
-  stories: StoryCollection;
-  events: Collection;
-  urls: Url[];
+  comics: {
+    available: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+    }[];
+    returned: number;
+  };
+  series: {
+    available: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+    }[];
+    returned: number;
+  };
+  stories: {
+    available: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+      type: string;
+    }[];
+    returned: number;
+  };
+  events: {
+    available: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+    }[];
+    returned: number;
+  };
+  urls: {
+    type: string;
+    url: string;
+  }[];
 }
 
-interface Thumbnail {
-  path: string;
-  extension: string;
+interface MarvelAPIResponse {
+  offset: number;
+  limit: number;
+  total: number;
+  count: number;
+  results: MarvelCharacter[];
 }
 
-interface Collection {
-  available: number;
-  collectionURI: string;
-  items: CollectionItem[];
-  returned: number;
+interface MarvelAPIPages {
+  pages: MarvelAPIResponse[];
 }
 
-interface CollectionItem {
-  resourceURI: string;
+interface MarvelAPIObject {
+  json: MarvelAPIPages;
+  meta: {
+    values: {
+      [key: string]: any;
+    };
+  };
+}
+
+// Tipos para Hero e Comic
+interface Comic {
+  id: number;
+  title: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  dates: { type: string; date: string }[];
+  pageCount: number;
+  description: string;
+}
+
+interface Hero {
   name: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  comics: Comic[];
 }
 
-interface StoryCollection {
-  available: number;
-  collectionURI: string;
-  items: Story[];
-  returned: number;
+interface CharacterDetailProps {
+  hero: Hero;
 }
-
-interface Story {
-  resourceURI: string;
-  name: string;
-  type: string;
-}
-
-interface Url {
-  type: string;
-  url: string;
-}
-
-interface HeroApiItem {}

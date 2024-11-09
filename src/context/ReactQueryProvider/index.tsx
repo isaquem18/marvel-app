@@ -10,7 +10,7 @@ const queryClientOptions = {
   defaultOptions: {
     // 5 * 1000
     queries: {
-      staleTime: 300000,
+      staleTime: 7200000,
       gcTime: 7200000,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
