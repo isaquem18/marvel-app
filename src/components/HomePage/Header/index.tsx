@@ -12,7 +12,7 @@ export function Header() {
   const updateThrottledValue = useCallback(
     throttle((value: string) => {
       setSearchHeroValue(value);
-    }, 2500),
+    }, 1500),
     []
   );
 
