@@ -26,6 +26,13 @@ export const BackButton = styled.button`
   border: 0;
 `;
 
+export const Container = styled.section`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px; /* Espaçamento entre os itens */
+`;
+
 export const TitleFavoritesPage = styled.h1`
   font-size: 3rem;
   font-weight: 900;
@@ -41,7 +48,7 @@ export const TitleFavoritesPage = styled.h1`
 export const ProfileContainer = styled.div`
   flex: 1;
   max-width: calc(1197px + 3rem);
-  height: 100%;
+  height: calc(100vh - 82px);
   margin: 0 auto 0 auto;
   padding: 0 1.5rem;
   position: relative;

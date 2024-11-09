@@ -12,7 +12,7 @@ export function HeroCardSkeleton() {
           <S.TitleHeroCard>
             <Skeleton style={{ flex: 1, width: "100%" }} />
           </S.TitleHeroCard>
-          <S.LikeButtonHeroCard>
+          <S.LikeButtonHeroCard disabled>
             <S.LikeButtonHeroCardIcon />
           </S.LikeButtonHeroCard>
         </S.TitleHeroCardContainer>

@@ -51,10 +51,7 @@ export const LikeButtonHeroCard = styled.button`
   border: 0;
   padding: 2px 10px;
   background-color: transparent;
-
-  &:active {
-    opacity: 0.5;
-  }
+  opacity: 0.2;
 `;
 
 export const LikeButtonHeroCardIcon: React.FC = styled(Image).attrs({
