@@ -18,13 +18,13 @@ export function HeroCard({
   return (
     <S.Container>
       <S.HeroCardImageContainer>
-        <Link href={`/character/${characterId}`} scroll={false}>
+        <Link href={`/character/${characterId}`} scroll={true}>
           {src && typeof src === "string" && <S.HeroCardImage src={src} fill />}
         </Link>
       </S.HeroCardImageContainer>
       <S.TitleHeroCardContainer>
         <S.TitleHeroCard>
-          <Link href={`/character/${characterId}`} scroll={false}>
+          <Link href={`/character/${characterId}`} scroll={true}>
             {title}
           </Link>
         </S.TitleHeroCard>
@@ -33,7 +33,7 @@ export function HeroCard({
         </S.LikeButtonHeroCard>
       </S.TitleHeroCardContainer>
       <S.TextDetails>
-        <Link href={`/character/${characterId}`} scroll={false}>
+        <Link href={`/character/${characterId}`} scroll={true}>
           {text}
         </Link>
       </S.TextDetails>

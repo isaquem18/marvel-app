@@ -5,6 +5,7 @@ import * as S from "./styles";
 import { useQuery } from "@tanstack/react-query";
 import { useMarvelHeroes } from "@/hooks";
 import { Footer } from "@/components/Footer";
+import CharacterDetailsSkeleton from "@/components/CharacterDetailsSkeleton";
 
 export default function CharacterDetailPage({
   params,
@@ -18,6 +19,10 @@ export default function CharacterDetailPage({
     queryKey: ["MarvelHeroDetails", id],
     queryFn: () => fetchMarvelHeroDetail(id),
   });
+
+  if (isLoading) {
+    return <CharacterDetailsSkeleton />;
+  }
 
   return (
     <>
@@ -36,6 +41,7 @@ export default function CharacterDetailPage({
             src={`${data?.thumbnail.path}.${data?.thumbnail.extension}`}
             alt={data?.name}
           />
+
           <S.HeroDetails>
             <S.HeroName>{data?.name}</S.HeroName>
             <S.HeroDescription>{data?.description}</S.HeroDescription>
@@ -44,22 +50,26 @@ export default function CharacterDetailPage({
         <S.ComicList>
           {data?.comics.map((comic: any) => (
             <S.ComicCard key={comic.id}>
-              <S.ComicImage
-                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                alt={comic.title}
-              />
+              <S.ComicImageContainer>
+                <S.ComicImage
+                  src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                  alt={comic.title}
+                />
+              </S.ComicImageContainer>
               <S.ComicDetails>
                 <S.ComicName>{comic.title}</S.ComicName>
-                <S.ComicReleaseDate>
-                  Release Date:{" "}
-                  {new Date(
-                    comic.dates.find((date: any) => date.type === "onsaleDate")
-                      ?.date || ""
-                  ).toLocaleDateString()}
-                </S.ComicReleaseDate>
-                <S.ComicPageCount>
-                  Page Count: {comic.pageCount}
-                </S.ComicPageCount>
+                <S.ReleaseInfo>
+                  <S.ComicReleaseDate>
+                    {new Date(
+                      comic.dates.find(
+                        (date: any) => date.type === "onsaleDate"
+                      )?.date || ""
+                    ).toLocaleDateString()}
+                  </S.ComicReleaseDate>
+                  <S.DotCircleIcon />
+                  <S.ComicPageCount>{comic.pageCount}</S.ComicPageCount>
+                  &nbsp;Pages
+                </S.ReleaseInfo>
                 <S.ComicDescription>
                   {comic.description.substring(0, 200)}...
                 </S.ComicDescription>

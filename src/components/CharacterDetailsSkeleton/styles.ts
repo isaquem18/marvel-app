@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import styled from "styled-components";
 import theme from "@/styles/theme";
-import Image from "next/image";
 
 interface BannerContainerProps {
   url: string;
@@ -26,27 +25,16 @@ export const BackButton = styled.button`
   border: 0;
 `;
 
-export const BannerContainer = styled.div<BannerContainerProps>`
+export const BannerContainer = styled.div`
   width: 100%;
   height: 578px;
   position: absolute;
-  background-image: url(${(props) => props.url});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   color: ${theme.colors.light};
   font-size: 36px;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  filter: brightness(0.3);
-
-  @media (max-width: 768px) {
-  }
-
-  @media (max-width: 1024px) {
-  }
+  background-color: ${theme.colors.gray_500};
 `;
 
 export const ProfileContainer = styled.div`
@@ -63,7 +51,7 @@ export const HeroDetailsCard = styled.div`
   background-color: #fff;
   height: 339px;
   border-radius: 30px;
-  padding: 20px;
+  padding: 20px 100px;
   width: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 80px;
@@ -75,22 +63,29 @@ export const HeroDetailsCard = styled.div`
   }
 `;
 
-export const HeroImage: React.FC<any> = styled(Image).attrs({
-  quality: 10,
-  priority: true,
-  width: 200,
-  height: 200,
-  style: {
-    objectFit: "cover",
-  },
-})`
-  border-radius: 200px;
+export const HeroImage = styled.img`
+  width: 200px;
+  height: 212px;
+  border-radius: 50%;
   margin-right: 39px;
   margin-left: 100px;
   transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 200px;
+    height: 212px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
   }
 `;
 
@@ -155,9 +150,9 @@ export const ComicList = styled.div`
 
 export const ComicCard = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  background-color: ${theme.colors.light};
-  overflow: hidden;
+  background-color: #fff;
   border-radius: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -171,36 +166,27 @@ export const ComicCard = styled.div`
   }
 `;
 
-export const ComicImageContainer = styled.div`
-  width: 208px;
-  height: 100%;
-  margin-right: 57px;
-  position: relative !important;
-  overflow: hidden;
+export const ComicImage = styled.img`
+  width: 248px;
+  height: 263.06px;
+  border-radius: 30px 0px 0px 30px;
+  margin-right: 54px;
 
   @media (max-width: 768px) {
-    width: 248px;
+    width: 200px;
     height: 212px;
     border-radius: 50%;
-
+    margin-right: auto;
+    margin-left: auto;
     transition: transform 0.3s ease;
+    display: block;
   }
 `;
 
-export const ComicImage: React.FC<any> = styled(Image).attrs({
-  quality: 1,
-  width: 248,
-  height: 263.06,
-  style: {
-    objectFit: "cover",
-  },
-})`
-  position: absolute;
-`;
-
 export const ComicDetails = styled.div`
-  flex: 0.5;
-  overflow: hidden;
+  text-align: left;
+  flex-grow: 1;
+
   @media (max-width: 768px) {
     text-align: center;
   }
@@ -216,11 +202,6 @@ export const ComicName = styled.h3`
     font-size: 24px;
     margin-bottom: 15px;
   }
-`;
-
-export const ReleaseInfo = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 export const ComicReleaseDate = styled.p`
@@ -258,18 +239,4 @@ export const ComicDescription = styled.p`
     font-size: 16px;
     margin-right: 0;
   }
-`;
-
-export const DotCircleIcon: React.FC = styled(Image).attrs({
-  src: "/icons/dot-circle.svg",
-  quality: 10,
-  priority: true,
-  alt: "search icon from input",
-  width: 11.4,
-  height: 8.38,
-  style: {
-    objectFit: "contain",
-  },
-})`
-  margin: 0px 8px 0px 16px;
 `;

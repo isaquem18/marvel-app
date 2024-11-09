@@ -62,7 +62,7 @@ export const SearchInput = styled.input.attrs({
 
 export const SearchIcon: React.FC = styled(Image).attrs({
   src: "/icons/search.svg",
-  quality: 100,
+  quality: 10,
   priority: true,
   alt: "search icon from input",
   width: 30,

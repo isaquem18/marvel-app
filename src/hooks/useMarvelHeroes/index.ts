@@ -10,7 +10,10 @@ const useMarvelHeroes = () => {
   const hash = CryptoJS.MD5(ts + privateKey + publicKey).toString();
 
   const fetchMarvelHeroes = useCallback(
-    async ({ pageParam }: any) => {
+    async ({ pageParam, searchHeroValue }: any) => {
+      const nameStartsWith =
+        searchHeroValue.length > 0 ? { nameStartsWith: searchHeroValue } : {};
+
       const response = await request<any>({
         method: "get",
         url: "/characters",
@@ -20,6 +23,7 @@ const useMarvelHeroes = () => {
           hash,
           limit: 12,
           offset: pageParam,
+          ...nameStartsWith,
         },
       });
 
@@ -60,8 +64,6 @@ const useMarvelHeroes = () => {
     }));
 
     const heroData = heroResponse.data.data.results[0];
-
-    console.log(heroData);
 
     return {
       name: heroData.name,

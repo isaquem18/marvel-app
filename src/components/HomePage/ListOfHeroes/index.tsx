@@ -5,10 +5,13 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMarvelHeroes } from "@/hooks";
 import { useEffect, useState } from "react";
 import { executeOnScrollBottom } from "@/utils/onScrollNearBottom";
+import { useNavigationData } from "@/context/NavigationData";
+
 import * as S from "./styles";
 
 export function ListOfHeroes() {
   const { fetchMarvelHeroes } = useMarvelHeroes();
+  const { searchHeroValue } = useNavigationData();
   const [isClient, setIsClient] = useState(false);
 
   // Define que o componente está rodando no cliente
@@ -18,8 +21,9 @@ export function ListOfHeroes() {
 
   const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["MarvelHeroes"],
-      queryFn: ({ pageParam = 0 }) => fetchMarvelHeroes({ pageParam }),
+      queryKey: ["MarvelHeroes", searchHeroValue],
+      queryFn: ({ pageParam = 0 }) =>
+        fetchMarvelHeroes({ pageParam, searchHeroValue }),
       getNextPageParam: (lastPage, allPages) => {
         const nextOffset = allPages.length * 12; // Incrementa o offset por página
         return nextOffset < lastPage.total ? nextOffset : undefined;
@@ -36,7 +40,7 @@ export function ListOfHeroes() {
       }
     };
 
-    const cleanup = executeOnScrollBottom(handleBottomReached, 20, 3000);
+    const cleanup = executeOnScrollBottom(handleBottomReached, 200, 4000);
     return cleanup;
   }, [fetchNextPage, isFetchingNextPage, isClient]);
 

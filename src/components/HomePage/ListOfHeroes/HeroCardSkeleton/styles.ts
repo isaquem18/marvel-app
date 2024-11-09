@@ -59,7 +59,7 @@ export const LikeButtonHeroCard = styled.button`
 
 export const LikeButtonHeroCardIcon: React.FC = styled(Image).attrs({
   src: "/icons/like.svg",
-  quality: 100,
+  quality: 10,
   priority: true,
   alt: "search icon from input",
   width: 22,
