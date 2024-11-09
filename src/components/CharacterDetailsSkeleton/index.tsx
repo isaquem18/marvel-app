@@ -43,6 +43,7 @@ export default function CharacterDetailsSkeleton() {
                   flex: 1,
                   height: "23px",
                   width: "40vw",
+                  maxWidth: 700,
                   borderRadius: 30,
                 }}
                 count={3}

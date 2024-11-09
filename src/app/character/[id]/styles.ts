@@ -199,8 +199,9 @@ export const ComicImage: React.FC<any> = styled(Image).attrs({
 `;
 
 export const ComicDetails = styled.div`
-  flex: 0.5;
+  flex: 1;
   overflow: hidden;
+  width: 100%;
   @media (max-width: 768px) {
     text-align: center;
   }
