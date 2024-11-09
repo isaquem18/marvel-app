@@ -1,8 +1,27 @@
+"use client";
+import { useCallback, useState } from "react";
 import { useNavigationData } from "@/context/NavigationData";
+import throttle from "lodash.throttle";
 import * as S from "./styles";
 
 export function Header() {
-  const { searchHeroValue, setSearchHeroValue } = useNavigationData();
+  const [throttledValue, setThrottledValue] = useState("");
+  const { setSearchHeroValue } = useNavigationData();
+
+  // Função throttled para atualizar o valor com limite de 500ms
+  const updateThrottledValue = useCallback(
+    throttle((value: string) => {
+      setSearchHeroValue(value);
+    }, 2500),
+    []
+  );
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setThrottledValue(value);
+    updateThrottledValue(value);
+  };
+
   return (
     <S.Container>
       <S.Title>EXPLORE O UNIVERSO E CRIE SUA EQUIPE</S.Title>
@@ -13,8 +32,8 @@ export function Header() {
       <S.SearchInputContainer>
         <S.SearchIcon />
         <S.SearchInput
-          value={searchHeroValue}
-          onChange={(tag) => setSearchHeroValue(tag.target.value)}
+          value={throttledValue}
+          onChange={(tag) => handleChange(tag)}
         />
       </S.SearchInputContainer>
     </S.Container>
