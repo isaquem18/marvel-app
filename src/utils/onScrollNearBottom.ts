@@ -19,6 +19,8 @@ export function executeOnScrollBottom(
   const handleScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
+    console.log(scrollTop, scrollHeight, clientHeight);
+
     // Verifica se o usuário chegou próximo ao bottom da página
     if (scrollTop + clientHeight >= scrollHeight - offset) {
       const now = Date.now();

@@ -5,6 +5,8 @@ interface NavigationDataProps {
   setHeroesListOffsetPagination: (value: any) => any;
   searchHeroValue: string;
   setSearchHeroValue: (value: any) => any;
+  throttledSearchValue: string;
+  setThrottledSearchValue: (value: any) => any;
 }
 
 const NavigationContext = createContext<NavigationDataProps>(
@@ -20,6 +22,7 @@ export const NavigationProvider: React.FC<AuthProviderProps> = ({
 }) => {
   const [heroesListOffsetPagination, setHeroesListOffsetPagination] =
     useState<number>(0);
+  const [throttledSearchValue, setThrottledSearchValue] = useState("");
   const [searchHeroValue, setSearchHeroValue] = useState<string>("");
 
   return (
@@ -27,6 +30,8 @@ export const NavigationProvider: React.FC<AuthProviderProps> = ({
       value={{
         heroesListOffsetPagination,
         setHeroesListOffsetPagination,
+        throttledSearchValue,
+        setThrottledSearchValue,
         searchHeroValue,
         setSearchHeroValue,
       }}

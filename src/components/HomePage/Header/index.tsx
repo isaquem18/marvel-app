@@ -5,8 +5,8 @@ import throttle from "lodash.throttle";
 import * as S from "./styles";
 
 export function Header() {
-  const [throttledValue, setThrottledValue] = useState("");
-  const { setSearchHeroValue } = useNavigationData();
+  const { setSearchHeroValue, throttledSearchValue, setThrottledSearchValue } =
+    useNavigationData();
 
   // Função throttled para atualizar o valor com limite de 500ms
   const updateThrottledValue = useCallback(
@@ -18,7 +18,7 @@ export function Header() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setThrottledValue(value);
+    setThrottledSearchValue(value);
     updateThrottledValue(value);
   };
 
@@ -32,7 +32,7 @@ export function Header() {
       <S.SearchInputContainer>
         <S.SearchIcon />
         <S.SearchInput
-          value={throttledValue}
+          value={throttledSearchValue}
           onChange={(tag) => handleChange(tag)}
         />
       </S.SearchInputContainer>
