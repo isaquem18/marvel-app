@@ -12,7 +12,6 @@ type ScrollbarTopValue = (n: number) => void;
  */
 export function executeOnScrollBottom(
   callback: ScrollCallback,
-  scrollYPosition: { current: number },
   offset: number = 100,
   delay: number = 1000
 ): () => void {
@@ -20,10 +19,6 @@ export function executeOnScrollBottom(
 
   const handleScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-    if (scrollTop >= 200) {
-      scrollYPosition.current = scrollTop;
-    }
 
     // Verifica se o usuário chegou próximo ao bottom da página
     if (scrollTop + clientHeight >= scrollHeight - offset) {

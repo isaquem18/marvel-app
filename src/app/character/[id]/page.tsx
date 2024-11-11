@@ -26,9 +26,8 @@ export default function CharacterDetailPage({
 
   return (
     <>
-      <S.BackLink href="/">
-        <S.BackButton>voltar</S.BackButton>
-      </S.BackLink>
+      <S.BackButton onClick={() => window.history.back()}>voltar</S.BackButton>
+
       <S.BannerContainer
         url={`${data?.thumbnail.path}.${data?.thumbnail.extension}`}
       />

@@ -8,22 +8,16 @@ interface BannerContainerProps {
   url: string;
 }
 
-export const BackLink = styled(Link)`
-  text-align: left;
+export const BackButton = styled.button`
+  background-color: ${theme.colors.red_900_70};
   color: ${theme.colors.light};
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  padding: 4px 10px;
+  border: 0;
   position: fixed;
   left: 1rem;
   top: 1rem;
   z-index: 10;
-`;
-
-export const BackButton = styled.button`
-  background-color: ${theme.colors.red_900_70};
-  color: ${theme.colors.light};
-  font-size: 1rem;
-  padding: 4px 10px;
-  border: 0;
 `;
 
 export const BannerContainer = styled.div<BannerContainerProps>`

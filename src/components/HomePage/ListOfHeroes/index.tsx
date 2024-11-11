@@ -13,7 +13,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export function ListOfHeroes() {
   const { fetchMarvelHeroes } = useMarvelHeroes();
-  const { searchHeroValue, scrollYPosition } = useNavigationData();
+  const { searchHeroValue } = useNavigationData();
   const [isClient, setIsClient] = useState(false);
 
   const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } =
@@ -41,12 +41,7 @@ export function ListOfHeroes() {
       }
     };
 
-    const cleanup = executeOnScrollBottom(
-      handleBottomReached,
-      scrollYPosition,
-      400,
-      3000
-    );
+    const cleanup = executeOnScrollBottom(handleBottomReached, 400, 3000);
 
     return () => {
       cleanup();

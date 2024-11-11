@@ -11,9 +11,10 @@ export default function CharacterDetailsSkeleton() {
   return (
     <SkeletonTheme baseColor="#cbcbcb" highlightColor="#a6a6a6">
       <>
-        <S.BackLink href="/">
-          <S.BackButton>voltar</S.BackButton>
-        </S.BackLink>
+        <S.BackButton onClick={() => window.history.back()}>
+          voltar
+        </S.BackButton>
+
         <S.BannerContainer />
         <S.ProfileContainer>
           <S.TitleHeroDetail>

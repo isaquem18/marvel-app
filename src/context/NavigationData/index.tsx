@@ -7,9 +7,6 @@ interface NavigationDataProps {
   setSearchHeroValue: (value: any) => any;
   throttledSearchValue: string;
   setThrottledSearchValue: (value: any) => any;
-  scrollYPosition: {
-    current: number;
-  };
 }
 
 const NavigationContext = createContext<NavigationDataProps>(
@@ -27,7 +24,6 @@ export const NavigationProvider: React.FC<AuthProviderProps> = ({
     useState<number>(0);
   const [throttledSearchValue, setThrottledSearchValue] = useState("");
   const [searchHeroValue, setSearchHeroValue] = useState<string>("");
-  const scrollYPosition = useRef(0);
 
   return (
     <NavigationContext.Provider
@@ -38,7 +34,6 @@ export const NavigationProvider: React.FC<AuthProviderProps> = ({
         setThrottledSearchValue,
         searchHeroValue,
         setSearchHeroValue,
-        scrollYPosition,
       }}
     >
       {children}
