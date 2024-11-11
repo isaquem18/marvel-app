@@ -1,6 +1,7 @@
 // utils/executeOnScrollBottom.ts
 
 type ScrollCallback = () => void;
+type ScrollbarTopValue = (n: number) => void;
 
 /**
  * Executa uma função callback quando o scroll chega no bottom da página,
@@ -11,6 +12,7 @@ type ScrollCallback = () => void;
  */
 export function executeOnScrollBottom(
   callback: ScrollCallback,
+  scrollYPosition: { current: number },
   offset: number = 100,
   delay: number = 1000
 ): () => void {
@@ -19,7 +21,9 @@ export function executeOnScrollBottom(
   const handleScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    console.log(scrollTop, scrollHeight, clientHeight);
+    if (scrollTop >= 200) {
+      scrollYPosition.current = scrollTop;
+    }
 
     // Verifica se o usuário chegou próximo ao bottom da página
     if (scrollTop + clientHeight >= scrollHeight - offset) {

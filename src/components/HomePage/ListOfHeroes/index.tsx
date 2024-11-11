@@ -1,23 +1,21 @@
 "use client";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { HeroCard } from "./HeroCard";
 import { HeroCardSkeleton } from "./HeroCardSkeleton";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMarvelHeroes } from "@/hooks";
-import { useEffect, useMemo, useState } from "react";
 import { executeOnScrollBottom } from "@/utils/onScrollNearBottom";
 import { useNavigationData } from "@/context/NavigationData";
 
 import * as S from "./styles";
-import Link from "next/link";
 
 export function ListOfHeroes() {
   const { fetchMarvelHeroes } = useMarvelHeroes();
-  const { searchHeroValue } = useNavigationData();
+  const { searchHeroValue, scrollYPosition } = useNavigationData();
   const [isClient, setIsClient] = useState(false);
 
-  // Define que o componente está rodando no cliente
-  useEffect(() => {
-    setIsClient(true);
+  useLayoutEffect(() => {
+    window.scrollTo(0, scrollYPosition.current);
   }, []);
 
   const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } =
@@ -33,6 +31,10 @@ export function ListOfHeroes() {
     });
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
     if (!isClient) return;
 
     const handleBottomReached = () => {
@@ -41,8 +43,16 @@ export function ListOfHeroes() {
       }
     };
 
-    const cleanup = executeOnScrollBottom(handleBottomReached, 200, 4000);
-    return cleanup;
+    const cleanup = executeOnScrollBottom(
+      handleBottomReached,
+      scrollYPosition,
+      200,
+      4000
+    );
+
+    return () => {
+      cleanup();
+    };
   }, [fetchNextPage, isFetchingNextPage, isClient]);
 
   if (isError) return <p>Error loading heroes</p>;
@@ -56,11 +66,9 @@ export function ListOfHeroes() {
     <>
       <S.HeroListTopContainer>
         <S.FoundHeroes>Encontrados {totalResults} heróis</S.FoundHeroes>
-        <Link href="/favorites">
-          <S.FavoritesOnlyButton>
-            <S.LikeImageIcon /> Somente favoritos
-          </S.FavoritesOnlyButton>
-        </Link>
+        <S.FavoritesOnlyButton>
+          <S.LikeImageIcon /> Somente favoritos
+        </S.FavoritesOnlyButton>
       </S.HeroListTopContainer>
       <S.Container>
         {isLoading
