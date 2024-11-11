@@ -48,8 +48,9 @@ export const TitleFavoritesPage = styled.h1`
 export const ProfileContainer = styled.div`
   flex: 1;
   max-width: calc(1197px + 3rem);
-  height: calc(100vh - 82px);
   margin: 0 auto 0 auto;
   padding: 0 1.5rem;
   position: relative;
+  padding-bottom: 200px;
+  min-height: calc(100vh - 82px);
 `;

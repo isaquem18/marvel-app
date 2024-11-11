@@ -8,15 +8,13 @@ import { executeOnScrollBottom } from "@/utils/onScrollNearBottom";
 import { useNavigationData } from "@/context/NavigationData";
 
 import * as S from "./styles";
+import Link from "next/link";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export function ListOfHeroes() {
   const { fetchMarvelHeroes } = useMarvelHeroes();
   const { searchHeroValue, scrollYPosition } = useNavigationData();
   const [isClient, setIsClient] = useState(false);
-
-  useLayoutEffect(() => {
-    window.scrollTo(0, scrollYPosition.current);
-  }, []);
 
   const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } =
     useInfiniteQuery({
@@ -46,8 +44,8 @@ export function ListOfHeroes() {
     const cleanup = executeOnScrollBottom(
       handleBottomReached,
       scrollYPosition,
-      200,
-      4000
+      400,
+      3000
     );
 
     return () => {
@@ -64,38 +62,50 @@ export function ListOfHeroes() {
 
   return (
     <>
-      <S.HeroListTopContainer>
-        <S.FoundHeroes>Encontrados {totalResults} heróis</S.FoundHeroes>
-        <S.FavoritesOnlyButton>
-          <S.LikeImageIcon /> Somente favoritos
-        </S.FavoritesOnlyButton>
-      </S.HeroListTopContainer>
-      <S.Container>
-        {isLoading
-          ? Array(8)
-              .fill(0)
-              .map((_, index) => <HeroCardSkeleton key={index} />)
-          : data?.pages.flatMap((page) =>
-              page.results.map((hero: MarvelCharacter) => (
-                <HeroCard
-                  key={hero.id}
-                  characterId={hero.id}
-                  src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-                  title={hero.name}
-                  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel convallis velit."
-                />
-              ))
+      <SkeletonTheme baseColor="#e1e1e1" highlightColor="#a6a6a6">
+        <S.HeroListTopContainer>
+          <S.FoundHeroes>
+            Encontrados
+            {isLoading ? (
+              <Skeleton style={{ height: 30, width: 60, margin: "0px 10px" }} />
+            ) : (
+              <span style={{ margin: "0px 10px" }}>{totalResults}</span>
             )}
-        {isFetchingNextPage && (
-          <>
-            {Array(8)
-              .fill(0)
-              .map((_, index) => (
-                <HeroCardSkeleton key={`skeleton-${index}`} />
-              ))}
-          </>
-        )}
-      </S.Container>
+            heróis
+          </S.FoundHeroes>
+          <Link href="/favorites" scroll={true}>
+            <S.FavoritesOnlyButton>
+              <S.LikeImageIcon /> Somente favoritos
+            </S.FavoritesOnlyButton>
+          </Link>
+        </S.HeroListTopContainer>
+        <S.Container>
+          {isLoading
+            ? Array(8)
+                .fill(0)
+                .map((_, index) => <HeroCardSkeleton key={index} />)
+            : data?.pages.flatMap((page) =>
+                page.results.map((hero: MarvelCharacter) => (
+                  <HeroCard
+                    key={hero.id}
+                    characterId={hero.id}
+                    src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                    title={hero.name}
+                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel convallis velit."
+                  />
+                ))
+              )}
+          {isFetchingNextPage && (
+            <>
+              {Array(8)
+                .fill(0)
+                .map((_, index) => (
+                  <HeroCardSkeleton key={`skeleton-${index}`} />
+                ))}
+            </>
+          )}
+        </S.Container>
+      </SkeletonTheme>
     </>
   );
 }

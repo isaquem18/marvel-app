@@ -57,27 +57,16 @@ export const LikeButtonHeroCard = styled.button`
   }
 `;
 
-export const LikeButtonHeroCardIcon: React.FC = styled(Image).attrs({
-  src: "/icons/like.svg",
+export const TrashButtonHeroCardIcon: React.FC = styled(Image).attrs({
+  src: "/icons/trash.svg",
   quality: 10,
   priority: true,
-  alt: "search icon from input",
-  width: 22,
-  height: 20,
+  alt: "delete icon from favorite card",
+  width: 18,
+  height: 18,
   style: {
     objectFit: "contain",
-  },
-})``;
-
-export const LikedButtonHeroCardIcon: React.FC = styled(Image).attrs({
-  src: "/icons/liked.svg",
-  quality: 10,
-  priority: true,
-  alt: "search icon from input",
-  width: 22,
-  height: 20,
-  style: {
-    objectFit: "contain",
+    opacity: 0.7,
   },
 })``;
 

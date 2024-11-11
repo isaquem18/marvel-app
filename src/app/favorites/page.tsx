@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as S from "./styles";
 import { Footer } from "@/components/Footer";
 import { FavoriteHeroCard } from "@/components/FavoriteHeroCard";
-import { getData } from "@/utils/storage";
+import { getData, storeData } from "@/utils/storage";
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<any>([]);
@@ -17,6 +17,22 @@ export default function FavoritesPage() {
     })();
   }, []);
 
+  const handleDeleteFavorite = async (id: number) => {
+    const likedHeroes =
+      (await getData({ type: "local", name: "likedHeroes" })) || [];
+
+    const newLikedHeroesValue = likedHeroes.filter(
+      (item: any) => id !== item?.characterId
+    );
+
+    storeData({
+      name: "likedHeroes",
+      value: newLikedHeroesValue,
+      type: "local",
+    });
+    setFavorites(newLikedHeroesValue);
+  };
+
   return (
     <>
       <S.BackLink href="/">
@@ -27,10 +43,11 @@ export default function FavoritesPage() {
         <S.Container>
           {favorites?.map((hero: any) => (
             <FavoriteHeroCard
+              handleDeleteFavorite={handleDeleteFavorite}
               key={hero.characterId}
-              characterId={hero.id}
+              characterId={hero.characterId}
               src={`${hero.src}`}
-              title={hero.name}
+              title={hero.title}
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel convallis velit."
             />
           ))}

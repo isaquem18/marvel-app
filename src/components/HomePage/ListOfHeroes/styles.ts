@@ -25,6 +25,8 @@ export const FoundHeroes = styled.div`
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: ${theme.colors.gray_500_60};
+  display: flex;
+  align-items: center;
 `;
 
 export const FavoritesOnlyButton = styled.button`

@@ -8,6 +8,7 @@ interface Props {
   title: string;
   text: string;
   characterId: number;
+  handleDeleteFavorite: (n: number) => void;
 }
 
 export function FavoriteHeroCard({
@@ -15,6 +16,7 @@ export function FavoriteHeroCard({
   title = "",
   text = "",
   characterId = 0,
+  handleDeleteFavorite,
 }: Props) {
   return (
     <S.Container>
@@ -27,8 +29,8 @@ export function FavoriteHeroCard({
         <S.TitleHeroCard>
           <Link href={`/character/${characterId}`}>{title}</Link>
         </S.TitleHeroCard>
-        <S.LikeButtonHeroCard>
-          <S.LikedButtonHeroCardIcon />
+        <S.LikeButtonHeroCard onClick={() => handleDeleteFavorite(characterId)}>
+          <S.TrashButtonHeroCardIcon />
         </S.LikeButtonHeroCard>
       </S.TitleHeroCardContainer>
       <S.TextDetails>
