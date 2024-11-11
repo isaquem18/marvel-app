@@ -8,21 +8,14 @@ import { useNavigationData } from "@/context/NavigationData";
 
 export function HomePage() {
   const { scrollYPosition } = useNavigationData();
-  const [isReady, setIsReady] = useState(false);
 
   useLayoutEffect(() => {
     window.scrollTo(0, scrollYPosition.current);
-
-    setIsReady(true);
   }, []);
 
   return (
     <>
-      <S.Container
-        style={{
-          visibility: isReady ? "visible" : "hidden", // Controla a visibilidade inicial
-        }}
-      >
+      <S.Container>
         <S.ContainerContent>
           <Header />
           <ListOfHeroes />

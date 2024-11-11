@@ -73,7 +73,7 @@ export function ListOfHeroes() {
             )}
             heróis
           </S.FoundHeroes>
-          <Link href="/favorites" scroll={true}>
+          <Link href="/favorites">
             <S.FavoritesOnlyButton>
               <S.LikeImageIcon /> Somente favoritos
             </S.FavoritesOnlyButton>
